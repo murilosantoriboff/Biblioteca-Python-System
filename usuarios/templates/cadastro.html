@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Cadastro
+{% endblock %}
+
+{% block conteudo %}
+    <div class="container">
+        <br>
+        {% if status == '0' %}
+            <div class="alert alert-success" role="alert">
+                Cadastro realizado com sucesso.
+            </div>
+        {% endif %}
+        {% if status == '1' %}
+            <div class="alert alert-danger" role="alert">
+                Nome ou Email não podem estar vazios!
+            </div>
+        {% endif %}
+        {% if status == '2' %}
+            <div class="alert alert-danger" role="alert">
+                Senha muito curta!
+            </div>
+        {% endif %}
+        {% if status == '3' %}
+            <div class="alert alert-danger" role="alert">
+                Usuario ja existente!
+            </div>
+        {% endif %}
+        {% if status == '4' %}
+            <div class="alert alert-danger" role="alert">
+                Erro interno do sistema!
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md">
+                <h1>Cadastre-se</h1>
+                <hr>
+
+                <form method="POST" action="{% url 'valida_cadastro' %}">
+                    {% csrf_token %}
+                    <label>Nome:</label>
+                    <input type="text" placeholder="Nome..." class="form-control" name="nome">
+                    <br>
+                    <label>Email:</label>
+                    <input type="text" placeholder="Email..." class="form-control" name="email">
+                    <br>
+                    <label>Senha:</label>
+                    <input type="password" placeholder="Senha..." class="form-control" name="senha">
+                    <br>
+                    <input type="submit" value="Enviar" class="btn btn-success">
+                    <a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+                </form>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
